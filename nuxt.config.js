@@ -15,7 +15,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['@/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -28,8 +28,14 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
+    '@nuxt/postcss8',
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/google-fonts'
   ],
+
+  router: {
+    middleware: ['auth']
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -37,7 +43,67 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/auth-next',
+    // '@nuxtjs/firebase'
+    [
+      '@nuxtjs/firebase', {
+        config: {
+          apiKey: "AIzaSyAELwPlAlShNdMDXg4-dUGbkmBsoRNlWmI",
+          authDomain: "financial-tracker-d38eb.firebaseapp.com",
+          projectId: "financial-tracker-d38eb",
+          storageBucket: "financial-tracker-d38eb.appspot.com",
+          messagingSenderId: "73386805709",
+          appId: "1:73386805709:web:135dc681a3418a58345c84",
+          measurementId: "G-0L3B6RRQQB"
+        },
+        services: {
+          auth: {
+            persistence: 'local', // default
+            initialize: {
+              onAuthStateChangedAction: 'onAuthStateChangedAction',
+              subscribeManually: false
+            },
+            ssr: false // default
+          }
+        }
+      }
+    ]
   ],
+
+  // firebase: {
+    // options
+    // config: {
+    //   apiKey: "AIzaSyAELwPlAlShNdMDXg4-dUGbkmBsoRNlWmI",
+    //   authDomain: "financial-tracker-d38eb.firebaseapp.com",
+    //   projectId: "financial-tracker-d38eb",
+    //   storageBucket: "financial-tracker-d38eb.appspot.com",
+    //   messagingSenderId: "73386805709",
+    //   appId: "1:73386805709:web:135dc681a3418a58345c84",
+    //   measurementId: "G-0L3B6RRQQB"
+    // },
+    // services: {
+    //   auth: {
+    //     persistence: 'local', // default
+    //     initialize: {
+    //       onAuthStateChangedAction: 'onAuthStateChangedAction',
+    //       subscribeManually: false
+    //     },
+    //     ssr: false // default
+    //   }
+    // }
+  // },
+
+  googleFonts: {
+    families: {
+      Poppins: [100, 600, 800],
+      'Josefin+Sans': true,
+      Lato: [100, 300],
+      Raleway: {
+        wght: [600, 800],
+        ital: [100, 600]
+      },
+    }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -53,5 +119,12 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+    },
+  },
 }
