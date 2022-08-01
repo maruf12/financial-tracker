@@ -11,5 +11,18 @@ module.exports = {
   extends: ['@nuxtjs', 'plugin:nuxt/recommended', 'prettier'],
   plugins: [],
   // add your custom rules here
-  rules: {},
+  rules: {
+    "no-console": "off"
+    // 'at-rule-no-unknown': [true, {
+    //   ignoreAtRules: [
+    //     'tailwind',
+    //     'apply',
+    //     'variants',
+    //     'responsive',
+    //     'screen'
+    //   ]
+    // }],
+    // 'declaration-block-trailing-semicolon': null,
+    // 'no-descending-specificity': null
+  },
 }
